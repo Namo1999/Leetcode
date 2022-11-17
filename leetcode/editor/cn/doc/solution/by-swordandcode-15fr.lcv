@@ -1,0 +1,75 @@
+### 解题思路
+
+此处撰写解题思路
+（1）首先对字符串数组中的每次字符串按照字符顺序进行排序
+![image.png](https://pic.leetcode-cn.com/1654351718-ueSteA-image.png)
+
+（2）建立以排序后字符串为Key的HASH 表，如果找到对应的Key，保存原始字符串，计数加1
+（3）遍历字符串数组中的每个字符串，查询HASH,没有找到插入新的Key，找到了保存原始字符串
+（4）使用迭代遍历Hash表。
+![image.png](https://pic.leetcode-cn.com/1654351863-GTKFvb-image.png)
+
+### 代码
+
+* c
+
+```c
+/**
+ * Return an array of arrays of size *returnSize.
+ * The sizes of the arrays are returned as *returnColumnSizes array.
+ * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
+ */
+#define MAX_SIZE 1005
+int cmp(void *a,void*b)
+{
+    char dataA = *(char*)(a);
+    char dataB =*(char*)(b);
+    return dataA - dataB;
+}
+typedef struct{
+    char* string;
+    int length;
+    char **array;
+    UT_hash_handle hh;
+}HASH;
+HASH *g_user =  NULL;
+char *** groupAnagrams(char ** strs, int strsSize, int* returnSize, int** returnColumnSizes){
+    char***ans = (char***)malloc(10000*sizeof(char**));
+    *returnColumnSizes = (int*)malloc(10000*sizeof(int));
+    for(int i=0;i<strsSize;i++){
+        char*str = strs[i];
+        int len = strlen(str);
+        char*origin = (char*)malloc((len+1)*sizeof(char));
+        strcpy(origin,strs[i]);        
+        qsort(str,len,sizeof(char),cmp);
+        HASH * temp = NULL;
+        HASH_FIND_STR(g_user,str,temp);
+        if(temp == NULL){
+            temp =(HASH*)malloc(sizeof(HASH));
+            temp->array=(char**)malloc(MAX_SIZE*sizeof(char*));
+            temp->string = str;
+            temp->length = 0;
+            temp->array[temp->length++] = origin;
+            HASH_ADD_STR(g_user,string,temp);
+        }else {
+            temp->array[temp->length++] = origin;
+        }
+    }
+    HASH * temp = NULL;
+    HASH * s = NULL;
+    int cnt = 0;
+    HASH_ITER(hh, g_user, s, temp){
+        char**group = (char**)malloc(s->length*sizeof(char*));
+        for(int i =0;i<s->length;i++){
+            group[i] = s->array[i];
+        }
+        (*returnColumnSizes)[cnt] = s->length;
+        ans[cnt] = group;
+        cnt++;
+        HASH_DEL(g_user,s);
+    }
+    *returnSize = cnt;
+    return ans;
+}
+```
+

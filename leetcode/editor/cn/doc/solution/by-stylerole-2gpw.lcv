@@ -1,0 +1,77 @@
+### 解题思路
+
+固定窗口
+1.用dicp，dics来存p，与当前窗口内的字符。
+2.比较dicp与dics，如果一样，加入res。
+
+### 代码
+
+* cpp
+
+```cpp
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> dicp(26);
+        vector<int> dics(26);
+        int plen = p.length();
+        int slen = s.length();
+        if(plen>slen) return {};
+        vector<int> res;
+        for(auto ss:p){
+            dicp[ss-'a']++;
+        }
+        for(int i = 0; i < plen; i++){
+            dics[s[i]-'a']++;
+        }
+        if(dicp == dics) res.push_back(0);
+        for(int i = 1; i < slen - plen + 1; i++){
+            dics[s[i-1]-'a']--;
+            dics[s[i+plen-1]-'a']++;
+            if(dicp == dics) res.push_back(i);
+        }
+        return res;
+    }
+};
+```
+
+### 解题思路
+
+可变窗口
+1.用dicp来存p。
+2.设置窗口边界r，l，r向右移动，并把这个元素加入dics中，dics[s[r]-'a']++。
+3.如果dics[s[r]-'a']>dicp[s[r]-'a']，说明r与l这段窗口肯定不满足异位词，此时l向右移动，直到dics[s[r]-'a']=dicp[s[r]-'a']，这次该窗口有可能是正确答案，判断长度，如果与plen相等，则它一定是异位词。
+
+### 代码
+
+* 
+
+```
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        vector<int> dicp(26);
+        vector<int> dics(26);
+        int plen = p.length();
+        int slen = s.length();
+        if(plen>slen) return {};
+        vector<int> res;
+        for(int i = 0; i < plen; i++){
+            dicp[p[i]-'a']++;
+        }
+        int r = 0, l = 0;
+        while(r<slen){
+            dics[s[r]-'a']++;
+            while(dics[s[r]-'a']>dicp[s[r]-'a']){
+                dics[s[l]-'a']--;
+                l++;
+            }
+            if(r-l+1 == plen) res.push_back(l);
+            r++;
+        }
+        
+        return res;
+    }
+};
+```
+
