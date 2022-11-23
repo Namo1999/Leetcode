@@ -36,34 +36,21 @@ using namespace std;
 class Solution {
 public:
     int search(vector<int>& nums, int target) {
-//        int left = 0;
-//        int right = nums.size()-1;
-//        int middle = 0;
-//        while(left <= right){
-//          middle =left + (right - left)/2;
-//          if(nums[middle] > target){
-//            right = middle - 1;
-//          }else if(nums[middle] < target){
-//            left = middle + 1;
-//          }else
-//            return middle;
-//        }
-//        return -1;
+      int left = 0;
+      int right = nums.size()-1;
+      while(left <= right){
+        int mid = left + (right - left)/2;
+        if(target == nums[mid]){
+          return mid;
+        }else if(target < nums[mid]){
+          right = mid - 1;
+        }else if(target > nums[mid]){
+          left = mid + 1;
+        }
 
-          int left = 0;
-          int right = nums.size();
-          int middle = 0;
-          while(left < right){
-            middle = left + (right - left) /2;
-            if(nums[middle] > target){
-              right = middle;
-            }else if( nums[middle] < target){
-              left = middle + 1;
-            }else{
-              return middle;
-            }
-          }
-          return -1;
+      }
+      return -1;
+
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
@@ -77,4 +64,5 @@ int main()
     auto res = s.search(data,target);
 //    auto res = "Hello LeetCode";
     cout<<res<<endl;
+    return 0;
 }

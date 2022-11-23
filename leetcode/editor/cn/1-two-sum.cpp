@@ -22,13 +22,13 @@ using namespace std;
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-      unordered_map<int,int> map;
+      unordered_map<int,int> mymap;
       for(int i = 0; i < nums.size(); i++){
-         auto item = map.find(target- nums[i]);
-         if(item != map.end()){
-           return {item->second,i};
-         }
-         map.insert(pair<int,int>(nums[i],i));
+        auto item = mymap.find(target-nums[i]);
+        if(item != mymap.end()){
+          return {item->second,i};
+        }
+        mymap.insert(pair<int,int>(nums[i],i));
       }
       return {};
 
@@ -44,5 +44,5 @@ int main()
     //vector<int> ans = s.twoSum(data,11);
     //cout << ans[0]<<ans[1]<<endl;
     auto res = s.twoSum(data,12);
-    cout<<res[0]<<endl<<res[1]<<endl;
+    cout<<res[0]<<" "<<res[1]<<endl;
 }

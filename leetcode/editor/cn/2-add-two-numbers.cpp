@@ -58,34 +58,32 @@ using namespace std;
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-      ListNode* head = nullptr, *tail = nullptr;
-      int carry =0;
-      while(l1 || l2){
-        int n1 = l1 ? l1->val : 0;
-        int n2 = l2 ? l2->val : 0;
+       ListNode* dummyHead = new ListNode(0);
+       dummyHead->next = nullptr;
+       ListNode* cur = dummyHead;
+       int carry = 0;
+       while(l1 || l2){
+         int n1 = l1 ? l1->val : 0;
+         int n2 = l2 ? l2->val : 0;
 
-        int sum = n1 + n2 + carry;
+         int sum = n1 + n2 + carry;
+         cur->next= new ListNode(sum % 10);
+         cur= cur->next;
 
-        if(!head){
-          head = tail = new ListNode(sum % 10);
-        }else{
-          tail->next = new ListNode(sum % 10);
-          tail = tail->next;
-        }
+         carry = sum / 10;
 
-        carry = sum / 10;
-        if(l1){
-          l1 = l1->next;
-        }
-        if(l2){
-          l2 = l2->next;
-        }
+         if(l1){
+           l1 = l1->next;
+         }
+         if(l2){
+           l2 = l2->next;
+         }
+       }
+       if(carry > 0){
+         cur->next = new ListNode(carry);
+       }
 
-      }
-      if(carry > 0){
-        tail->next = new ListNode(carry);
-      }
-      return head;
+       return dummyHead->next;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
@@ -94,7 +92,11 @@ public:
 int main()
 {
     Solution s;
-    vector<int> data{7, 1, 5, 3, 6, 4};
-    auto res = "Hello LeetCode";
-    cout<<res<<endl;
+    List L1 = List({9,9,9});
+    List L2 = List({9,9,9});
+//    print_list(L1.head);
+    auto res = s.addTwoNumbers(L1.head,L2.head);
+    print_list(res);
+
+    return 0;
 }

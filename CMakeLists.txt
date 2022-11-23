@@ -177,3 +177,5 @@ add_executable(1575-count-all-possible-routes leetcode/editor/cn/1575-count-all-
 add_executable(code_5 leetcode/editor/cn/code_5.cpp)
 add_executable(code_6 leetcode/editor/cn/code_6.cpp)
 add_executable(29-divide-two-integers leetcode/editor/cn/29-divide-two-integers.cpp)
+add_executable(4-median-of-two-sorted-arrays leetcode/editor/cn/4-median-of-two-sorted-arrays.cpp)
+add_executable(5-longest-palindromic-substring leetcode/editor/cn/5-longest-palindromic-substring.cpp)

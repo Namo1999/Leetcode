@@ -46,16 +46,57 @@ using namespace std;
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
+      int maxLength = 0;
+      if(s.size() == 0){
+        return maxLength;
+      }
+      unordered_set<char> lookup;
+      int left = 0;
+      for(int i = 0; i < s.size(); i++){
+        while (lookup.find(s[i]) != lookup.end()){
+          lookup.erase(s[left]);
+          left++;
+        }
+        maxLength = max(maxLength,i-left+1);
+        lookup.insert(s[i]);
+      }
+      return maxLength;
 
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
 
-
+string lengthOfLongestSubstring(string s) {
+  int maxLength = 0;
+  if (s.size() == 0) {
+    return s;
+  }
+  unordered_set<char> lookup;
+  int left = 0;
+  int start = 0;
+  int end = 0;
+  for (int i = 0; i < s.size(); i++) {
+    while (lookup.find(s[i]) != lookup.end()) {
+      lookup.erase(s[left]);
+      left++;
+    }
+    if (maxLength < i - left + 1) {
+      start = left;
+      end = i;
+      maxLength = i - left + 1;
+    }
+    lookup.insert(s[i]);
+  }
+  return s.substr(start, maxLength);
+}
 int main()
 {
     Solution s;
     vector<int> data{7, 1, 5, 3, 6, 4};
-    auto res = "Hello LeetCode";
+    string s1 = "abcabcbb";
+    auto res = s.lengthOfLongestSubstring(s1);
     cout<<res<<endl;
+    auto str = lengthOfLongestSubstring(s1);
+    cout << str << endl;
+    return 0;
 }

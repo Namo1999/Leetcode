@@ -38,7 +38,7 @@ struct TreeNode
 
 void print_tree(TreeNode *root);
 bool is_same_tree(TreeNode *root1, TreeNode *root2);
-// creatTree 创建一个数 根据vector来
+// creatTree 创建一个树 根据vector来
 TreeNode* creatTree(std::vector<int> list, int start = 0);
 
 class Tree
