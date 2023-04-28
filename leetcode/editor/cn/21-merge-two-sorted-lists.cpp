@@ -53,41 +53,33 @@ using namespace std;
 class Solution {
 public:
   ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-    ListNode* dummyHead = new ListNode (0);
-    ListNode* cur = dummyHead;
-    ListNode* cur1 = list1;
-    ListNode* cur2 = list2;
-    while(cur1 &&  cur2){
-      ListNode* temp;
-      if(cur1->val <= cur2->val ){
-        temp = cur1;
-        cur1=cur1->next;
-      }else{
-        temp = cur2;
-        cur2 = cur2->next;
-      }
-      cur->next = temp;
-      cur = cur->next;
-    }
-//    while(cur1 != nullptr){
-//      cur->next = cur1;
-//      cur = cur->next;
-//      cur1 = cur1->next;
+    // 迭代法
+//    ListNode* dummy = new ListNode(0);
+//    ListNode* p = dummy;
+//    while(list1 != nullptr && list2 != nullptr){
+//      if(list1->val < list2->val){
+//        p->next = list1;
+//        list1 = list1->next;
+//      }else{
+//        p->next = list2;
+//        list2 = list2->next;
+//      }
+//      p = p->next;
 //    }
-//    while(cur2 != nullptr){
-//      cur->next = cur2;
-//      cur = cur->next;
-//      cur2 = cur2->next;
-//    }
-
-
-    if(cur1 != nullptr){
-      cur = cur1;
+//    p->next = list1 == nullptr ? list2 : list1;
+//    return dummy->next;
+    // 递归法
+    if(list1 == nullptr){
+      return list2;
+    }else if(list2 == nullptr){
+      return list1;
+    }else if(list1->val < list2->val){
+      list1->next = mergeTwoLists(list1->next,list2);
+      return list1;
+    }else{
+      list2->next = mergeTwoLists(list1,list2->next);
+      return list2;
     }
-    if(cur2 != nullptr){
-      cur = cur2;
-    }
-    return dummyHead->next;
   }
 };
 //leetcode submit region end(Prohibit modification and deletion)

@@ -46,7 +46,29 @@ using namespace std;
 class Solution {
 public:
     int findPeakElement(vector<int>& nums) {
+      int n = nums.size();
 
+      auto get = [&](int i)->pair<int,int>{
+        if( i == -1 || i == n){
+          return {0,0};
+        }
+        return {1,nums[i]};
+      };
+
+      int left = 0, right = n-1,ans = -1;
+      while(left <= right){
+        int mid = (left + right)/2;
+        if(get(mid) > get(mid-1) && get(mid) > get(mid+1)){
+          ans = mid;
+          break ;
+        }
+        if(get(mid) > get(mid-1)){
+          left = mid + 1;
+        }else{
+          right = mid - 1;
+        }
+      }
+      return ans;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
@@ -54,8 +76,8 @@ public:
 
 int main(){
    Solution s;
-   vector<int> data{1,2,3,4,5};
-   auto res = "hello world";
+   vector<int> data{1,2,1,3,5,6,4};
+   auto res = s.findPeakElement(data);
    cout << res << endl;
    return 0;
 }

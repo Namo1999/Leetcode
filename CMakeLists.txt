@@ -183,3 +183,5 @@ add_executable(33-search-in-rotated-sorted-array leetcode/editor/cn/33-search-in
 add_executable(69-sqrtx leetcode/editor/cn/69-sqrtx.cpp)
 add_executable(74-search-a-2d-matrix leetcode/editor/cn/74-search-a-2d-matrix.cpp)
 add_executable(162-find-peak-element leetcode/editor/cn/162-find-peak-element.cpp)
+add_executable(88-merge-sorted-array leetcode/editor/cn/88-merge-sorted-array.cpp)
+add_executable(86-partition-list leetcode/editor/cn/86-partition-list.cpp)
