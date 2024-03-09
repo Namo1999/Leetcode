@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.9)
 project(LeetCode)
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 
 #链接库
 aux_source_directory(leetcode/editor/cn/include LEETCODE)
@@ -185,3 +185,5 @@ add_executable(74-search-a-2d-matrix leetcode/editor/cn/74-search-a-2d-matrix.cp
 add_executable(162-find-peak-element leetcode/editor/cn/162-find-peak-element.cpp)
 add_executable(88-merge-sorted-array leetcode/editor/cn/88-merge-sorted-array.cpp)
 add_executable(86-partition-list leetcode/editor/cn/86-partition-list.cpp)
+add_executable(learn_prio_queue leetcode/editor/cn/learn_prio_queue.cpp)
+add_executable(_l_c_r_057-7WqeDu leetcode/editor/cn/_l_c_r_057-7WqeDu.cpp)

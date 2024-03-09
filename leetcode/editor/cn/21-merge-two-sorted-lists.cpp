@@ -54,32 +54,34 @@ class Solution {
 public:
   ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
     // 迭代法
-//    ListNode* dummy = new ListNode(0);
-//    ListNode* p = dummy;
+//    ListNode* dummyList = new ListNode(0);
+//    ListNode* cur = dummyList;
 //    while(list1 != nullptr && list2 != nullptr){
-//      if(list1->val < list2->val){
-//        p->next = list1;
+//      if(list1->val <= list2->val){
+//        cur->next = list1;
 //        list1 = list1->next;
 //      }else{
-//        p->next = list2;
+//        cur->next = list2;
 //        list2 = list2->next;
 //      }
-//      p = p->next;
+//      cur = cur->next;
 //    }
-//    p->next = list1 == nullptr ? list2 : list1;
-//    return dummy->next;
+//    cur->next = list1 == nullptr ? list2 : list1;
+//    return dummyList->next;
+
     // 递归法
     if(list1 == nullptr){
-      return list2;
+      return  list2;
     }else if(list2 == nullptr){
       return list1;
-    }else if(list1->val < list2->val){
+    }else if(list1->val <= list2->val){
       list1->next = mergeTwoLists(list1->next,list2);
       return list1;
     }else{
       list2->next = mergeTwoLists(list1,list2->next);
       return list2;
     }
+
   }
 };
 //leetcode submit region end(Prohibit modification and deletion)

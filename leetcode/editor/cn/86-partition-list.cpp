@@ -55,23 +55,21 @@ public:
       ListNode* large_list = new ListNode(0);
       ListNode* large = large_list;
 
-
-      while(head != nullptr){
-        ListNode* temp;
-        if(head->val < x){
-          small->next = head;
+      ListNode* cur = head;
+      while(cur != nullptr){
+        if(cur->val < x){
+          small->next = cur;
           small = small->next;
-        }else {
-          large->next = head;
+        }else{
+          large->next = cur;
           large = large->next;
         }
-        temp = head->next;
-        head->next = nullptr;
-        head = temp;
+        cur = cur->next;
       }
-//      large->next = nullptr;
+      large->next = nullptr;
       small->next = large_list->next;
       return  small_list->next;
+
 
 
     }

@@ -46,20 +46,32 @@ using namespace std;
 class Solution {
 public:
     int searchInsert(vector<int>& nums, int target) {
-      int left = 0;
-      int right = nums.size()-1;
-      int middle = 0;
-      while(left <= right){
-          middle = left + (right - left) / 2;
-          if(nums[middle] < target){
-            left = middle + 1;
-          }else if(nums[middle] > target){
-            right = middle-1;
-          }else{
-            return middle;
-          }
-      }
-      return right+1;
+//      int left = 0;
+//      int right = nums.size()-1;
+//      int middle = 0;
+//      while(left <= right){
+//          middle = left + (right - left) / 2;
+//          if(nums[middle] < target){
+//            left = middle + 1;
+//          }else if(nums[middle] > target){
+//            right = middle-1;
+//          }else{
+//            return middle;
+//          }
+//      }
+//      return right+1;
+        int left = 0;
+        int right = nums.size();
+        while(left < right){
+          int mid = left + (right - left) / 2;
+          if(nums[mid] > target){
+            right = mid;
+          }else if(nums[mid] < target){
+            left = mid + 1;
+          }else
+            return mid;
+        }
+        return right;
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
