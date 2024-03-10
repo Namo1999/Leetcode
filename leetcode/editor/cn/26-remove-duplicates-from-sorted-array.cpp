@@ -78,7 +78,7 @@ public:
 int main()
 {
     Solution s;
-    vector<int> data{1,1,2};
+    vector<int> data{1,1,2,2};
     auto res = s.removeDuplicates(data);
     cout<<res<<endl;
 }

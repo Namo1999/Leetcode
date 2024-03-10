@@ -48,25 +48,24 @@ using namespace std;
 class Solution {
 public:
     vector<int> sortedSquares(vector<int>& nums) {
-      // 暴力求解法
-//      for(int i = 0; i <nums.size();i++){
-//        nums[i]*=nums[i];
-//      }
-//      sort(nums.begin(),nums.end()); //快速排序
-//      return nums;
+
       // 双指针
-      int k = nums.size()-1;
-      vector<int> result(nums.size(),0);
-      for(int i = 0,j = nums.size()-1;i <=j;){   // i <=j 是因为result里面初始都是0,当i=j时，把那个数 放到第一个里面
-        if(nums[i] * nums[i] < nums[j] * nums[j]){
-          result[k--] = nums[j]*nums[j];
-          j--;
-        }else{
-          result[k--]=nums[i]*nums[i];
-          i++;
+      int left = 0, right = nums.size()-1;
+      vector<int> res;
+      while(left <= right){
+        int left_ans = nums[left] * nums[left];
+        int right_ans = nums[right] * nums[right];
+        if(left_ans < right_ans){
+          res.emplace_back(right_ans);
+          right--;
+        }else {
+          res.emplace_back(left_ans);
+          left++;
         }
       }
-      return result;
+      sort(res.begin(),res.end());
+      return res;
+
     }
 };
 //leetcode submit region end(Prohibit modification and deletion)
